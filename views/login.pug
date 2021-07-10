@@ -1,0 +1,112 @@
+extends base
+
+block content
+
+    // Content
+    section#content
+        // Content Row
+        section.content-row.content-row-color.content-row-clouds.content-row-full-height
+            .container
+                header.content-header.content-header-large.content-header-uppercase
+                    h1
+                        i.fa.fa-wifi.icon-left
+                        br
+                        |               - HotSpot Sign In -
+                        br
+                        |               High Speed Fibre Connectivity
+                    p Abuja | Akwanga | Lafia | Makurdi | Ugbokolo | Enugu | and more ...
+                .column-row.align-center
+                    .column-40
+                        - if (error)
+                            .text-color-error(style='background: pink; padding: 15px')
+                                i.fas.fa-exclamation-circle.icon-left 
+                                | #{error}
+                                
+                        
+                        //form.form-full-width#loginForm(method='post' action='/submitLogin')
+                        form.form-full-width#loginForm(method='post' action='http://hotspot.wifi/login')
+                            input#mac(type='hidden' value=`${mac}` name='mac')
+                            input#ip(type='hidden' value=`${ip}` name='ip')
+                            input#link-login(type='hidden' value=`${link-login}` name='link-login')
+                            input#link-orig(type='hidden' value=`${link-orig}` name='link-orig')
+                            input#popup(type='hidden' value='true' name='popup')
+                            .form-row
+                                input#email(type='email' name='username' placeholder='Email Address' value=`${username}` required)
+                            .form-row
+                                input#password(type='password' name='password' placeholder='Password' required)
+                            .form-row
+                                input#form-login(type='checkbox' name='login' checked='')
+                                label(for='form-login') Save my login session on this computer
+                            .group.form-row
+                                button.group-stretch.button-secondary
+                                    i.fas.fa-lock.icon-left
+                                    | Login To Browse the web
+                            .form-row
+                                p.text-color-gray.text-align-center
+                                    small
+                                        | Not a HotSpot User? 
+                                        a.text-color-light(href='#') Sign Up
+            .content-background.content-background-light.content-background-scale
+                //
+                    <video
+                    src="uploads/banner-user-onboarding.mp4"
+                    autoplay
+                    loop
+                    muted
+                    ></video>
+                img(src='img/layout/map-light.svg' alt='')
+        // Content Row
+        section.content-row
+            .container
+                .content-box
+                    h1 Our Locations
+                    .column-row
+                        .column-33
+                            h3 Head Office
+                            p
+                                | 61, Adetokunbo Ademola Crescent 
+                                br
+                                |                   Wuse 2, Abuja, FCT. 
+                                br
+                                |                   Nigeria
+                            p
+                                | Google Map:
+                                a(href='#')  https://goo.gl/maps/fRTCdpwpNCt
+                                br
+                        .column-33
+                            h3 Network Operating Center
+                            p
+                                | Plot 1243, Kur Mohammed Street, Off Ahmadu Bello Way, 
+                                br
+                                |                   Central Business District, 
+                                br
+                                |                   Abuja, FCT
+                            p
+                                | Google Map:
+                                a(href='#')  https://goo.gl/maps/YeyZEjHUqGo
+                                br
+                        .column-33
+                            h3 Abuja 2 Office
+                            p
+                                | 1st Floor,Bank of Industry Building, Plot 256, 
+                                br
+                                |                   Zone A O, Off Herbert Macaulay Way, 
+                                br
+                                |                   Central Business District, 
+                                br
+                                |                   Abuja, FCT.
+                            p
+                                | Google Map:
+                                a(href='#') https://goo.gl/maps/hCmMGvL7Cvp
+                                br
+        // Content Row
+        section.content-row.content-row-gray
+            .container
+                .column-row.align-center
+                    .column-50.text-align-center
+                        p.text-color-gray
+                            | Having troubles logging into your account?
+                            br
+                            a(href='#')
+                                | Password Reset
+                                i.fas.fa-angle-right.icon-right

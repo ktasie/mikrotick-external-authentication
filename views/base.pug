@@ -1,0 +1,37 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        title HotSpot | Galaxy Backbone
+        meta(name='description' content='Galaxy Backbone HotSpot Page.')
+        meta(name='keywords' content='html template, responsive, retina, cloud hosting, technology, startup')
+        meta(name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1')
+        // Icons
+        link(rel='apple-touch-icon-precomposed' href='img/icons/apple-touch-icon.png')
+        link(rel='icon' href='img/icons/favicon.ico')
+        // Stylesheets
+        link(rel='stylesheet' href='/css/fontawesome.min.css')
+        link(rel='stylesheet' href='/css/main.min.css')
+        link(rel='stylesheet' href='/css/custom.css')
+
+    body
+        // HEADER
+        include _header
+
+        // CONTENT
+        block content 
+            h1 This is a placeholder
+
+        // FOOTER
+        include _footer
+
+        // Scripts
+        script(src='/js/jquery.min.js')
+        script(src='/js/headroom.min.js')
+        script(src='/js/js.cookie.min.js')
+        script(src='/js/imagesloaded.min.js')
+        script(src='/js/bricks.min.js')
+        script(src='/js/main.min.js')
+        //script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js')
+        script(src='/js/axios.min.js')
+        script(src='/js/custom.js')

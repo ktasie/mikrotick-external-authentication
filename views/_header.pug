@@ -1,0 +1,43 @@
+header#header.header-dynamic.header-light.header-shadow-scroll
+    .container
+        a.logo(href='/')
+            img(src='img/logos/gbblogo.png' alt='')
+        nav
+            ul.nav-primary
+                li
+                    a(href='#') Coverage
+                li
+                    a(href='http://galaxybackbone.com.ng' target='_blank') Company
+                - if(login)
+                    li
+                        a.button.button-secondary(href='/registration')
+                            i.fas.fa-lock.icon-left
+                            | HotSpot Sign Up.
+                - else
+                    li
+                        a.button.button-secondary(href='/')
+                            i.fas.fa-lock.icon-left
+                            | HotSpot Sign In.
+            ul.nav-secondary
+                li
+                    a(href='#')
+                        i.fas.fa-phone.icon-left
+                        | +234 94 621 500 | +234 807 399 0518
+                li
+                    a(href='#')
+                        i.fas.fa-comment.icon-left
+                        | servicedesk@galaxybackbone.com.ng&ZeroWidthSpace;&ZeroWidthSpace;
+                //
+                    <li>
+                    <a href="service-status.html"
+                    ><i class="fas fa-check icon-left"></i>Service Status</a
+                    >
+                    </li>
+// Notification
+section#notification(data-dismissible='true' data-title='' data-expires='')
+    .container
+        p
+            | Welcome to Galaxy Backbone HotSpot Services. Please Sign In below to use this service or
+            a.text-margin-left(href='#')
+                | Sign Up
+                i.fas.fa-angle-right.icon-right

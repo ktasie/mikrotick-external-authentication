@@ -1,0 +1,46 @@
+extends base
+
+block content
+
+    // Content
+    section#content
+        // Content Row
+        section.content-row.content-row-color.content-row-clouds
+            .container
+                header.content-header.content-header-small.content-header-uppercase
+                    h1
+                        i.fa.fa-wifi.icon-left
+                        br
+                        | HotSpot Sign Up
+                    p Our wifi portal uses 128-bit encryption. Your details are safe.
+        // Content Row
+        section.content-row
+            .container
+                .column-row.align-center
+                    .column-50
+                        form#registrationForm.form-full-width(method='get' action='#')
+                            .form-row
+                                input#fullname(type='text' name='fullname' placeholder='Full Name (Surname first)')
+                            .form-row
+                                input#email(type='text' name='email' placeholder='Email Address')
+                            .form-row
+                                input#mobile(type='text' name='mobile' placeholder='Mobile')
+                            //.form-row
+                            //input#password(type='password' name='password' placeholder='Password')
+                            .form-row
+                                p.text-color-gray.text-align-center
+                                    small
+                                        | By signing up you agree to our 
+                                        a.text-color-primary(href='#') Terms of Service
+                                        |                       and 
+                                        a.text-color-primary(href='#') Privacy Policy
+                                        | .
+                            .group.form-row
+                                button.group-stretch.button-secondary
+                                    i.fas.fa-lock.icon-left
+                                    | Agree &amp; Sign up
+                            .form-row
+                                p.text-color-gray.text-align-center
+                                    strong
+                                        | Already a Member? 
+                                        a.text-color-primary(href='#') Sign In
