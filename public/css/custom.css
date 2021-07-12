@@ -44,40 +44,12 @@ button,
 #content > .content-row.content-row-color .product-box a:not(.button),
 #content > .content-row.content-row-color .product-slider a:not(.button),
 #content > .content-row.content-row-color .product-configurator a:not(.button),
-#content
-  > .content-row.content-row-color
-  .network-map
-  ul
-  li
-  span.label-top-left,
-#content
-  > .content-row.content-row-color
-  .network-map
-  ul
-  li
-  span.label-top-right,
-#content
-  > .content-row.content-row-color
-  .network-map
-  ul
-  li
-  span.label-bottom-left,
-#content
-  > .content-row.content-row-color
-  .network-map
-  ul
-  li
-  span.label-bottom-right,
-#content
-  > .content-row.content-row-color
-  .testimonial
-  .testimonial-content
-  a:not(.button),
-#content
-  > .content-row.content-row-color
-  .blog-comment-group
-  .blog-comment-content
-  a:not(.button) {
+#content > .content-row.content-row-color .network-map ul li span.label-top-left,
+#content > .content-row.content-row-color .network-map ul li span.label-top-right,
+#content > .content-row.content-row-color .network-map ul li span.label-bottom-left,
+#content > .content-row.content-row-color .network-map ul li span.label-bottom-right,
+#content > .content-row.content-row-color .testimonial .testimonial-content a:not(.button),
+#content > .content-row.content-row-color .blog-comment-group .blog-comment-content a:not(.button) {
   color: #339966;
 }
 
@@ -110,21 +82,9 @@ ul.tags li a,
 #content > .content-row.content-row-color.content-row-split-right::after,
 #content > .content-row.content-row-color .content-box,
 #content > .content-row.content-row-color .tab-group .tab-item .tab-item-title,
-#content
-  > .content-row.content-row-color
-  .tab-group:not(.tab-group-switch-style)
-  > ul
-  li,
-#content
-  > .content-row.content-row-color
-  .tab-group:not(.tab-group-switch-style)
-  > ul
-  li::after,
-#content
-  > .content-row.content-row-color
-  .tab-group:not(.tab-group-switch-style)
-  .tab-item
-  .tab-item-inner,
+#content > .content-row.content-row-color .tab-group:not(.tab-group-switch-style) > ul li,
+#content > .content-row.content-row-color .tab-group:not(.tab-group-switch-style) > ul li::after,
+#content > .content-row.content-row-color .tab-group:not(.tab-group-switch-style) .tab-item .tab-item-inner,
 .footer-color {
   background-color: #339966;
 }
@@ -162,11 +122,7 @@ form .select-style input.focus,
 #content > .content-row.content-row-color .icon-feature-inline,
 #content > .content-row.content-row-color .content-slider > ul li.active,
 #content > .content-row.content-row-color .tab-group .tab-item .tab-item-title,
-#content
-  > .content-row.content-row-color
-  .tab-group:not(.tab-group-switch-style)
-  > ul
-  li {
+#content > .content-row.content-row-color .tab-group:not(.tab-group-switch-style) > ul li {
   color: #ffcc33;
 }
 

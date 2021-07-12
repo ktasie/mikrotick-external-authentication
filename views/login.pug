@@ -31,7 +31,7 @@ block content
                             input#link-orig(type='hidden' value=`${link-orig}` name='link-orig')
                             input#popup(type='hidden' value='true' name='popup')
                             .form-row
-                                input#email(type='email' name='username' placeholder='Email Address' value=`${username}` required)
+                                input#email(type='email' name='username' placeholder='Email Address' value='' required)
                             .form-row
                                 input#password(type='password' name='password' placeholder='Password' required)
                             .form-row
@@ -45,7 +45,7 @@ block content
                                 p.text-color-gray.text-align-center
                                     small
                                         | Not a HotSpot User? 
-                                        a.text-color-light(href='#') Sign Up
+                                        a.text-color-light(href='/registration') Sign Up
             .content-background.content-background-light.content-background-scale
                 //
                     <video

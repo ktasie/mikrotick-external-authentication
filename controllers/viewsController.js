@@ -24,8 +24,23 @@ exports.registrationForm = (req, res) => {
   });
 };
 
+exports.createPassword = (req, res) => {
+  const { token } = req.params;
+  res.status(200).render('create-password', {
+    token,
+    pretty: true,
+  });
+};
+
 exports.thankYou = (req, res) => {
   res.status(200).render('thank-you', {
+    pretty: true,
+  });
+};
+
+exports.confirmEmail = (req, res) => {
+  res.status(200).render('confirm-email', {
+    login: false,
     pretty: true,
   });
 };

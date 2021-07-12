@@ -7,67 +7,6 @@ const User = require('./../models/userModel');
 //const app = require('../app');
 const AppError = require('./../utils/appError');
 
-exports.submitLogin = async (req, res, next) => {
-  /*
-  try {
-    const { email, password } = req.body;
-    console.log(email, password);
-
-    const res = await axios({
-      method: 'POST',
-      url: 'http://hotspot.wifi/login',
-      data: {
-        username: email,
-        password,
-      },
-    });
-
-    console.log(res.data);
-  } catch (err) {
-    console.log(err.message);
-  }
-  */
-
-  const api = new RouterOSClient({
-    host: 'router.lan',
-    user: 'admin',
-    password: 'Admin@123',
-  });
-
-  //console.log(api);
-  api
-    .connect()
-    .then((client) => {
-      // After connecting, the promise will return a client class so you can start using it
-
-      // You can either use spaces like the winbox terminal or
-      // use the way the api does like "/system/identity", either way is fine
-      // client
-      //   .menu('/tool')
-      //   .get()
-      //   .then((result) => {
-      //     console.log(result);
-      //   });
-      console.log(client);
-      /*
-      client
-        .menu('/system/identity')
-        .getOnly()
-        .then((result) => {
-          console.log(result); // Mikrotik
-          api.close();
-        })
-        .catch((err) => {
-          console.log(err); // Some error trying to get the identity
-        });
-        */
-    })
-    .catch((err) => {
-      // Connection error
-      console.log(err);
-    });
-};
-
 // Password Generator
 const generatePassword = () => {
   const pwdChars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz@?';
@@ -82,14 +21,11 @@ const generatePassword = () => {
 exports.submitRegistration = async (req, res, next) => {
   try {
     //let firstName, lastName;
-    const { fullname, email, mobile } = req.body;
+    const { firstName, lastName, email, mobile } = req.body;
 
-    const lastName = fullname.split(' ')[0];
-    const firstName = fullname.split(' ')[1];
+    //console.log(lastName, firstName, email, mobile);
 
-    console.log(lastName, firstName, email, mobile);
-
-    if (!fullname || !email || !mobile) {
+    if (!firstName || !lastName || !email || !mobile) {
       throw new AppError('All fields are required', 400);
     }
 
@@ -135,15 +71,30 @@ exports.submitRegistration = async (req, res, next) => {
 exports.confirmEmail = async (req, res, next) => {
   try {
     //Read url token variable
-    const urlToken = req.params.token;
-    const urlHashedToken = crypto.createHash('sha256').update(urlToken).digest('hex');
+    //const urlToken = req.params.token;
+    const { token, password } = req.body;
+
+    if (!token || !password) {
+      throw new AppError('Password or email token cannot be blank', 500);
+    }
+
+    /*
+    const regex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{10,}$', 'g');
+
+    console.log(regex.test(password), password);
+    if (!regex.test(password)) {
+      throw new AppError('Please refer to password criteria. It is not complex enough');
+    }
+    */
+    //console.log(token, password);
+    const urlHashedToken = crypto.createHash('sha256').update(token).digest('hex');
 
     //Query database for the required token
     const account = await User.findOne({ registerToken: urlHashedToken, active: false });
     //console.log(account);
 
     if (account) {
-      const password = generatePassword();
+      //const password = generatePassword();
 
       //Connect to routerOS
       const api = await new RouterOSClient({
@@ -152,12 +103,7 @@ exports.confirmEmail = async (req, res, next) => {
         password: process.env.ROUTEROS_PASSWORD,
         keepalive: true,
       }).connect();
-
       console.log(api);
-      if (!api) {
-        console.log(api);
-        throw new AppError('Mikrotik Connection error');
-      }
 
       const result = await api.menu('/tool/user-manager/user/').add({
         customer: process.env.ROUTEROS_RADIUS_CUSTOMER,
@@ -179,30 +125,30 @@ exports.confirmEmail = async (req, res, next) => {
 
       await sendEmail({
         to: account.email,
-        subject: '[GBB HotSpot] Login Credentials',
+        subject: '[GBB HotSpot] Thank you for registering',
         message: `
         Hey ${account.firstName},
 
-        Please find below your hotspot Login
-
-        username: ${account.email}
-        Password: ${password}
+        You have been successfully registered on Galaxy's hotspot.
+        
+        Enjoy your browsing
 
         -GalaxyBackbone Team
         `,
       });
 
-      res.status(200).render('confirm-email', {
-        login: false,
-        email: account.email,
-        password,
-        pretty: true,
+      await User.findByIdAndUpdate(account._id, { active: true });
+
+      return res.status(201).json({
+        status: 'success',
+        message: 'Account Registered successfully. Please wait while you are been redirected...',
       });
       //console.log('done');
     } else {
       throw new AppError('Token already verified or incorrect');
     }
   } catch (error) {
+    console.log(error);
     return next(new AppError(error.message, 400));
   }
 };
