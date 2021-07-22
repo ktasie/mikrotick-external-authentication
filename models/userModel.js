@@ -6,10 +6,12 @@ const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: [true, 'A full name is required!'],
+    maxlength: [20, 'Your first name is too long!'],
   },
   lastName: {
     type: String,
     required: [true, 'A full name is required'],
+    maxlength: [20, 'Your last name is too long!'],
   },
   email: {
     type: String,
@@ -21,6 +23,8 @@ const userSchema = new mongoose.Schema({
   mobile: {
     type: String,
     required: [true, 'Mobile number is required'],
+    maxlength: [20, 'Your mobile is too long!'],
+    validate: [validator.isNumeric, 'Your mobile must be a number'],
   },
   registerToken: String,
   registerTokenExpires: Date,

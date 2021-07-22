@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 //const axios = require('axios');
 const RouterOSClient = require('routeros-client').RouterOSClient;
+const validator = require('validator');
 
 const sendEmail = require('./../utils/email');
 const User = require('./../models/userModel');
@@ -22,6 +23,7 @@ exports.submitRegistration = async (req, res, next) => {
   try {
     //let firstName, lastName;
     const { firstName, lastName, email, mobile } = req.body;
+    //const csrfToken = req.csrfToken();
 
     //console.log(lastName, firstName, email, mobile);
 
@@ -78,14 +80,10 @@ exports.confirmEmail = async (req, res, next) => {
       throw new AppError('Password or email token cannot be blank', 500);
     }
 
-    /*
-    const regex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*d)(?=.*[@$!%*?&])[A-Za-zd@$!%*?&]{10,}$', 'g');
-
-    console.log(regex.test(password), password);
-    if (!regex.test(password)) {
-      throw new AppError('Please refer to password criteria. It is not complex enough');
+    if (!validator.isStrongPassword(password, { minLength: 10, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1 })) {
+      throw new AppError('Please refer to password criteria. It is not complex enough', 400);
     }
-    */
+
     //console.log(token, password);
     const urlHashedToken = crypto.createHash('sha256').update(token).digest('hex');
 

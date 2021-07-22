@@ -22,6 +22,7 @@ const submtiRegistration = async function (e) {
     const lastName = document.querySelector('#lastName').value;
     const email = document.querySelector('#email').value;
     const mobile = document.querySelector('#mobile').value;
+    //const csrfToken = document.querySelector('')
 
     //console.log(fullname, email, mobile, password);
     const res = await axios({

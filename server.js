@@ -6,14 +6,27 @@ dotenv.config({ path: './.env' });
 const app = require('./app');
 
 // Database connection
-mongoose
-  .connect(process.env.DATABASE_LOCAL, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('DB connection successful!'));
+if (process.env.NODE_ENV === 'production') {
+  mongoose
+    .connect(process.env.DATABASE_HOST, {
+      user: process.env.DATABASE_USER,
+      pass: process.env.DATABASE_PASSWORD,
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log('Production DB connection successful!'));
+} else if (process.env.NODE_ENV === 'development') {
+  mongoose
+    .connect(process.env.DATABASE_LOCAL, {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true,
+    })
+    .then(() => console.log('Local DB connection successful!'));
+}
 
 //Start Server
 const port = process.env.PORT || 3000;
@@ -28,8 +41,4 @@ process.on('unhandledRejection', (err) => {
   server.close(() => {
     process.exit(1);
   });
-});
-
-process.on('error', (err) => {
-  console.log(err);
 });
