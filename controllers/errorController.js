@@ -20,6 +20,12 @@ const handleValidationErrorDB = (err) => {
   return new AppError(message, 400);
 };
 
+const handleCsrfError = (err) => {
+  const message = 'You are not authorized to submit this form!';
+
+  return new AppError(message, 403);
+};
+
 //Handle all developement based error
 const sendErrorDev = (err, req, res) =>
   res.status(err.statusCode).json({
@@ -61,6 +67,7 @@ module.exports = (err, req, res, next) => {
     if (error.name === 'CastError') error = handleCastErrorDB(error);
     if (error.code === 11000) error = handleDuplicateFieldsDB(error);
     if (error.name === 'ValidationError') error = handleValidationErrorDB(error);
+    if (error.code === 'EBADCSRFTOKEN') error = handleCsrfError(error);
 
     sendErrorProd(error, req, res);
   }

@@ -28,6 +28,7 @@ block content
                                     input#email(type='text' name='email' placeholder='Email Address' required)
                                 .form-row
                                     input#mobile(type='text' name='mobile' placeholder='Mobile' required)
+                                    input#_csrf(type='hidden' name='_csrf' value=`${csrfToken}`)
                                 .group.form-row
                                     button#nextBtn.group-stretch.button-secondary
                                         | Next 

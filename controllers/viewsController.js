@@ -21,6 +21,7 @@ exports.registrationForm = (req, res) => {
   res.status(200).render('registration', {
     login: false,
     pretty: true,
+    csrfToken: req.csrfToken(),
   });
 };
 

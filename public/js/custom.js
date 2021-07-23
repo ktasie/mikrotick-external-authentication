@@ -22,7 +22,7 @@ const submtiRegistration = async function (e) {
     const lastName = document.querySelector('#lastName').value;
     const email = document.querySelector('#email').value;
     const mobile = document.querySelector('#mobile').value;
-    //const csrfToken = document.querySelector('')
+    const _csrf = document.querySelector('#_csrf').value;
 
     //console.log(fullname, email, mobile, password);
     const res = await axios({
@@ -33,6 +33,7 @@ const submtiRegistration = async function (e) {
         lastName,
         email,
         mobile,
+        _csrf,
       },
     });
 
@@ -63,6 +64,7 @@ const submtiRegistration = async function (e) {
     document.querySelector('#registrationForm').insertAdjacentHTML('afterbegin', html);
     // Reset to default tab
     showTab(0, arrayTab);
+    //console.log(error.response.data);
   }
   e.target.innerHTML = '<i class="fas fa-lock icon-left"></i>Agree & Signup';
 };
