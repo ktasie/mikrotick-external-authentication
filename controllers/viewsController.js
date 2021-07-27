@@ -4,7 +4,7 @@
 
 /* eslint-disable */
 exports.loginForm = (req, res) => {
-  //console.log(req.body);
+  //console.log(req.protocol, req.ip);
   res.status(200).render('login', {
     mac: req.body.mac,
     ip: req.body.ip,

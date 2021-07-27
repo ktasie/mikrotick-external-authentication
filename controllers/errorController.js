@@ -21,7 +21,7 @@ const handleValidationErrorDB = (err) => {
 };
 
 const handleCsrfError = (err) => {
-  const message = 'You are not authorized to submit this form!';
+  const message = 'Token Expired or you are not authorized to submit this form!';
 
   return new AppError(message, 403);
 };

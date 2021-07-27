@@ -3,10 +3,15 @@ const viewsController = require('../controllers/viewsController');
 const authController = require('../controllers/authController');
 const csrf = require('csurf');
 
-const csrfProtection = csrf({ cookie: true });
-const router = express.Router();
+const csrfProtection = csrf({
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    maxAge: 60 * 60,
+  },
+});
 
-//Middleware to handle csrf protection
+const router = express.Router();
 
 //Endpoints to display webforms
 router.get('/', viewsController.loginForm);

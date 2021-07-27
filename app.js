@@ -18,6 +18,10 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', true);
+}
+
 // console Logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));

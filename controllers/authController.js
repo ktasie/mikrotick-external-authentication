@@ -50,7 +50,7 @@ exports.submitRegistration = async (req, res, next) => {
     ${req.protocol}://${req.get('host')}/account/confirm-email/${registerToken}
 
     Once verified, you can then browse the web. If you have any problems,
-    please constact us: servicedesk@galaxybackbone.com.ng
+    please contact us: servicedesk@galaxybackbone.com.ng
 
     - GalaxyBackbone Team
     `;
@@ -101,7 +101,11 @@ exports.confirmEmail = async (req, res, next) => {
         password: process.env.ROUTEROS_PASSWORD,
         keepalive: true,
       }).connect();
-      console.log(api);
+      //console.log(api);
+
+      api.on('error', (err) => {
+        console.log(err); // Some error that ocurred when already connected
+      });
 
       const result = await api.menu('/tool/user-manager/user/').add({
         customer: process.env.ROUTEROS_RADIUS_CUSTOMER,
